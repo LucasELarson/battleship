@@ -8,7 +8,6 @@ class Ship {
    hit() {
       if (!this.sunk) {
          this.hits++;
-         console.log(this.hits);
          this.isSunk();
          return this.hits;
       } else {
@@ -20,9 +19,7 @@ class Ship {
       if (this.hits >= this.length) {
          this.sunk = true;
       }
-      console.log(this.sunk);
       return this.sunk;
    }
 }
-
 module.exports = Ship;
