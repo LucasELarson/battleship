@@ -27,13 +27,12 @@ function aiPlay() {
                square[z].style.backgroundColor = "red";
             }
          }
-      } else if (y === you.board.shipCoords.length - 1) {
+      } else {
          for (let z = 0; z < 100; z++) {
-            if (Number(square[z].firstElementChild.id[1]) === attack[0] && Number(square[z].firstElementChild.id[2]) === attack[1]) {
+            if (Number(square[z].firstElementChild.id[1]) === you.board.missedCoords[you.board.missedCoords.length - 1][0] && Number(square[z].firstElementChild.id[2]) === you.board.missedCoords[you.board.missedCoords.length - 1][1]) {
                square[z].style.backgroundColor = "white";
             }
          }
-         console.log("they missed");
       }
    }
    if (you.board.shipCoords)
