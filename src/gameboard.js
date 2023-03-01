@@ -18,7 +18,7 @@ class Gameboard {
    }
 
    placeShip(coord1, coord2, length) {
-      if (coord2 + length >= 10 || this.shipCoords.includes([coord1, coord2])) {
+      if (coord2 >= 9 || this.shipCoords.includes([coord1, coord2])) {
          console.log("ship exceeds bounds");
       } else {
          for (let i = 0; i < length; i++) {

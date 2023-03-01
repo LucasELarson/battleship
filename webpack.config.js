@@ -5,8 +5,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const isProduction = process.env.NODE_ENV == "production";
 
-const stylesHandler = MiniCssExtractPlugin.loader;
-
 const config = {
    entry: "./src/index.js",
    output: {
@@ -30,7 +28,7 @@ const config = {
          },
          {
             test: /\.css$/i,
-            use: [stylesHandler, "css-loader"],
+            use: ["style-loader", "css-loader"],
          },
          {
             test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,

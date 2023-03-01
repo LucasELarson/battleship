@@ -1,0 +1,50 @@
+#container{
+   display: grid;
+   height: 100vh;
+   width: 100vw;
+   background-color: blue;
+   grid-template-rows: 1fr 2fr;
+}
+body{
+   display: grid;
+   margin: 0px;
+   border: 0px;
+}
+
+#header {
+   display: grid;
+   width: 100vw;
+   background-color: red;
+   justify-content: center;
+   align-items: center;
+}
+
+#boards {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   align-items: center;
+   justify-items: center;
+}
+
+.board-container {
+   display: grid;
+   height: 50vh;
+   width: 50vh;
+   background-color: green;
+}
+
+.board-square{
+   background-color: black;
+}
+
+#clicked{
+   background-color: blue;
+}
+
+#hit{
+   background-color: red;
+}
+
+#missed{
+   background-color: white;
+}
