@@ -5,6 +5,9 @@ class Gameboard {
       this.hitCoords = [];
       this.missedCoords = [];
       this.allsunk = false;
+      this.shipSet = new Set();
+      this.hitSet = new Set();
+      this.missSet = new Set();
    }
 
    init() {
@@ -22,7 +25,12 @@ class Gameboard {
          console.log("ship exceeds bounds");
       } else {
          for (let i = 0; i < length; i++) {
-            this.shipCoords.push([coord1, coord2 + i]);
+            if (coord1 + i < 10) {
+               this.shipCoords.push([coord1 + i, coord2]);
+               this.shipSet.add(Number(`${coord1}${coord2}`));
+            } else {
+               this.placeShip(Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), length);
+            }
          }
       }
 
@@ -33,18 +41,20 @@ class Gameboard {
       for (let i = 0; i < this.shipCoords.length; i++) {
          if (this.shipCoords[i][0] === coord1 && this.shipCoords[i][1] === coord2) {
             this.hitCoords.push([coord1, coord2]);
-            this.allSunk();
+            this.hitSet.add(Number(`${coord1}${coord2}`));
             return this.hitCoords;
          }
       }
       this.missedCoords.push([coord1, coord2]);
+      this.missSet.add(Number(`${coord1}${coord2}`));
       return this.missedCoords;
    }
 
    allSunk() {
-      if (this.shipCoords.length === this.hitCoords.length) {
+      if (this.shipSet.size === this.hitSet.size) {
          console.log("ALL SHIPS SUNK");
          this.allsunk = true;
+         alert("ALL SUNK");
          return this.allsunk;
       }
    }

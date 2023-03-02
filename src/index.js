@@ -1,44 +1,45 @@
 import { startGame, you, them } from "./game";
 
 startGame();
-
+const prevSet = new Set();
 let isStart = false;
-const previous = [];
-console.log(them.board.shipCoords);
+// const previous = [];
 
 // Bot hits a random spot //
 
 function aiPlay() {
+   // console.log(previous);
+   let placeHit = [];
+   placeHit = them.randomPos();
    const square = document.querySelectorAll("td");
-   const attack = them.randomPos();
-   for (let i = 0; i < previous.length; i++) {
-      if (previous[i][0] === attack[0] && previous[i][1] === attack[1]) {
+   const hitInt = Number(`${placeHit[0]}${placeHit[1]}`);
+   for (let i = 0; i < prevSet.size; i++) {
+      if (Array.from(prevSet)[i] === hitInt) {
          console.log("that spot has been hit already");
          aiPlay();
       }
    }
-   previous.push(attack);
-   them.attack(you, attack[0], attack[1]);
+   prevSet.add(Number(`${placeHit[0]}${placeHit[1]}`));
+   them.attack(you, placeHit[0], placeHit[1]);
    for (let y = 0; y < you.board.shipCoords.length; y++) {
-      if (you.board.shipCoords[y][0] === attack[0] && you.board.shipCoords[y][1] === attack[1]) {
+      if (you.board.shipCoords[y][0] === placeHit[0] && you.board.shipCoords[y][1] === placeHit[1]) {
          console.log("youve been hit");
          for (let z = 0; z < 100; z++) {
-            if (Number(square[z].firstElementChild.id[1]) === attack[0] && Number(square[z].firstElementChild.id[2]) === attack[1]) {
+            if (Number(square[z].firstElementChild.id[1]) === placeHit[0] && Number(square[z].firstElementChild.id[2]) === placeHit[1]) {
                square[z].style.backgroundColor = "red";
+               aiPlay();
+               console.log("YOU GOT HIT");
             }
          }
       } else {
          for (let z = 0; z < 100; z++) {
             if (Number(square[z].firstElementChild.id[1]) === you.board.missedCoords[you.board.missedCoords.length - 1][0] && Number(square[z].firstElementChild.id[2]) === you.board.missedCoords[you.board.missedCoords.length - 1][1]) {
-               square[z].style.backgroundColor = "white";
+               square[z].style.backgroundColor = "yellow";
+               console.log("ENEMY MISS");
             }
          }
       }
    }
-   if (you.board.shipCoords)
-      if (you.board.allSunk() === true) {
-         alert("You Lose");
-      }
 }
 
 setTimeout(() => {
