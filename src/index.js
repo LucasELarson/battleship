@@ -16,7 +16,9 @@ function aiPlay() {
    for (let i = 0; i < prevSet.size; i++) {
       if (Array.from(prevSet)[i] === hitInt) {
          console.log("that spot has been hit already");
-         aiPlay();
+         setTimeout(() => {
+            aiPlay();
+         }, 50);
       }
    }
    prevSet.add(Number(`${placeHit[0]}${placeHit[1]}`));
@@ -28,6 +30,7 @@ function aiPlay() {
             if (Number(square[z].firstElementChild.id[1]) === placeHit[0] && Number(square[z].firstElementChild.id[2]) === placeHit[1]) {
                square[z].style.backgroundColor = "red";
                aiPlay();
+               you.board.allSunk();
                console.log("YOU GOT HIT");
             }
          }
