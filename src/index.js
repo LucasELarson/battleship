@@ -76,22 +76,22 @@ setTimeout(() => {
    // Make the attack on the enemy //
    for (let i = 100; i < square.length; i++) {
       square[i].addEventListener("click", (e) => {
-         console.log(them.board.shipCoords[0][0]);
-         console.log(them.board.shipCoords[0][1]);
-         for (let y = 0; y < them.board.shipCoords.length; y++) {
-            if (them.board.shipCoords[y][0] === Number(square[i].firstElementChild.id[1]) && them.board.shipCoords[y][1] === Number(square[i].firstElementChild.id[2])) {
-               square[i].style.backgroundColor = "green";
-               console.log("a hit");
-               you.attack(them, Number(square[i].firstElementChild.id[1]), Number(square[i].firstElementChild.id[2]));
-               if (them.board.allSunk() === true) {
-                  alert("YOU WIN!!!");
-               } else {
-                  return;
+         if (isStart === true) {
+            for (let y = 0; y < them.board.shipCoords.length; y++) {
+               if (them.board.shipCoords[y][0] === Number(square[i].firstElementChild.id[1]) && them.board.shipCoords[y][1] === Number(square[i].firstElementChild.id[2])) {
+                  square[i].style.backgroundColor = "green";
+                  console.log("a hit");
+                  you.attack(them, Number(square[i].firstElementChild.id[1]), Number(square[i].firstElementChild.id[2]));
+                  if (them.board.allSunk() === true) {
+                     alert("YOU WIN!!!");
+                  } else {
+                     return;
+                  }
+               } else if (y === them.board.shipCoords.length - 1) {
+                  console.log("you missed");
+                  square[i].setAttribute("id", "missed");
+                  aiPlay();
                }
-            } else if (y === them.board.shipCoords.length - 1) {
-               console.log("you missed");
-               square[i].setAttribute("id", "missed");
-               aiPlay();
             }
          }
       });

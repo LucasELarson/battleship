@@ -2,7 +2,7 @@
    display: grid;
    height: 100vh;
    width: 100vw;
-   background-color: blue;
+   background-color: rgb(177, 177, 177);
    grid-template-rows: 1fr 2fr;
 }
 body{
@@ -14,7 +14,7 @@ body{
 #header {
    display: grid;
    width: 100vw;
-   background-color: red;
+   background-color: hsl(0, 0%, 27%);
    justify-content: center;
    align-items: center;
 }
@@ -28,8 +28,9 @@ body{
 
 .board-container {
    display: grid;
-   height: 50vh;
-   width: 50vh;
+   height: 45vw;
+   width: 45vw;
+   margin: 5%;
    background-color: green;
 }
 
