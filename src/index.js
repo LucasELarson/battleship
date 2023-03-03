@@ -3,6 +3,7 @@ import "./STYLES/style.css";
 
 startGame();
 console.log(them.board.shipSet);
+alert("Yellow = miss\nGreen = Hit\nRed = You were hit");
 const prevSet = new Set();
 let isStart = false;
 // const previous = [];
