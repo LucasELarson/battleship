@@ -1,9 +1,12 @@
-#container{
+/*!************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/STYLES/style.css ***!
+  \************************************************************************/
+#container {
    display: grid;
    height: 100vh;
    width: 100vw;
    background-color: rgb(177, 177, 177);
-   grid-template-rows: 1fr 2fr;
+   grid-template-rows: auto 3fr;
 }
 body{
    display: grid;
@@ -32,7 +35,7 @@ body{
 
 #start {
    height: 6vh;
-   width: 10vw;
+   width: auto;
    border-style: solid;
    border-radius: 0px;
    border-color: green;
@@ -51,15 +54,15 @@ body{
 
 #boards {
    display: grid;
-   grid-template-columns: 1fr 1fr;
+   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
    align-items: center;
    justify-items: center;
 }
 
 .board-container {
    display: grid;
-   height: 45vw;
-   width: 45vw;
+   height: 90%;
+   width: 90%;
    margin: 5%;
    background-color: green;
 }
@@ -82,4 +85,9 @@ body{
 
 #missed{
    background-color: yellow;
+}
+
+td{
+   height: 5%;
+   width: 5%;
 }
