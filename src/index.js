@@ -49,10 +49,9 @@ function aiPlay() {
 
 setTimeout(() => {
    const square = document.querySelectorAll("td");
-   const enemyPlaced = document.getElementById("enemyplaced");
+
    const needToPlace = document.getElementById("toplace");
-   enemyPlaced.innerHTML = `The enemy has placed ${them.board.shipSet.size} ship cells!`;
-   needToPlace.innerHTML = `You need to place ${them.board.shipSet.size - you.board.shipSet.size} more ships`;
+   needToPlace.innerHTML = ` Place ${them.board.shipSet.size - you.board.shipSet.size}`;
    // Start game //
    const start = document.getElementById("start");
    start.addEventListener("click", (e) => {
@@ -79,7 +78,7 @@ setTimeout(() => {
                      you.board.shipSet.delete(Number(String(`${Number(String(Array.from(you.board.shipSet)[p]).charAt(0))}${Number(String(Array.from(you.board.shipSet)[p]).charAt(1))}`)));
                   }
                }
-               needToPlace.innerHTML = `You need to place ${them.board.shipSet.size - you.board.shipSet.size} more ships`;
+               needToPlace.innerHTML = ` Place ${them.board.shipSet.size - you.board.shipSet.size}`;
             } else {
                if (you.board.shipSet.size >= them.board.shipSet.size) {
                   alert("Maximum number of ships placed");
@@ -87,7 +86,11 @@ setTimeout(() => {
                   square[i].setAttribute("id", "clicked");
                   you.board.placeShip(Number(square[i].firstElementChild.id[1]), Number(square[i].firstElementChild.id[2]), 1);
                   console.log(you.board.shipSet);
-                  needToPlace.innerHTML = `You need to place ${them.board.shipSet.size - you.board.shipSet.size} more ships`;
+                  if (you.board.shipSet.size === them.board.shipSet.size) {
+                     needToPlace.innerHTML = `READY TO START`;
+                  } else {
+                     needToPlace.innerHTML = ` Place ${them.board.shipSet.size - you.board.shipSet.size}`;
+                  }
                }
             }
          } else {
