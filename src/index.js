@@ -49,9 +49,9 @@ function aiPlay() {
 
 setTimeout(() => {
    const square = document.querySelectorAll("td");
-
    const needToPlace = document.getElementById("toplace");
    needToPlace.innerHTML = ` Place ${them.board.shipSet.size - you.board.shipSet.size}`;
+
    // Start game //
    const start = document.getElementById("start");
    start.addEventListener("click", (e) => {

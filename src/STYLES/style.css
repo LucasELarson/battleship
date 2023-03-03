@@ -16,10 +16,12 @@ body{
    display: grid;
    width: 100vw;
    background-color: hsl(0, 0%, 27%);
+   /* align-content: center; */
    grid-template-columns: 1fr 1fr;
    align-items: center;
    justify-items: center;
 }
+
 
 
 #startgame {
@@ -86,7 +88,11 @@ body{
    background-color: yellow;
 }
 
-td{
+td {
+   max-height: 5%;
+   max-width: 5%;
    height: 5%;
+   min-height: 5%;
+   min-width: 5%;
    width: 5%;
 }
