@@ -2,8 +2,11 @@ import { startGame, you, them } from "./game";
 import "./STYLES/style.css";
 
 startGame();
+setTimeout(() => {
+   alert("Blue = Your Ship\nGreen = You Hit\nYello = Miss\nRed = You've Been Hit");
+}, 200);
+
 console.log(them.board.shipSet);
-alert("Yellow = miss\nGreen = Hit\nRed = You were hit");
 const prevSet = new Set();
 let isStart = false;
 // const previous = [];
@@ -32,9 +35,10 @@ function aiPlay() {
          for (let z = 0; z < 100; z++) {
             if (Number(square[z].firstElementChild.id[1]) === placeHit[0] && Number(square[z].firstElementChild.id[2]) === placeHit[1]) {
                square[z].style.backgroundColor = "red";
-               aiPlay();
+               setTimeout(() => {
+                  aiPlay();
+               }, 1000);
                you.board.allSunk();
-               console.log("YOU GOT HIT");
             }
          }
       } else {
@@ -107,6 +111,7 @@ setTimeout(() => {
             for (let y = 0; y < them.board.shipCoords.length; y++) {
                if (them.board.shipCoords[y][0] === Number(square[i].firstElementChild.id[1]) && them.board.shipCoords[y][1] === Number(square[i].firstElementChild.id[2])) {
                   square[i].style.backgroundColor = "green";
+                  needToPlace.innerHTML = "YOU HIT";
                   console.log("a hit");
                   you.attack(them, Number(square[i].firstElementChild.id[1]), Number(square[i].firstElementChild.id[2]));
                   if (them.board.allSunk() === true) {
@@ -117,7 +122,10 @@ setTimeout(() => {
                } else if (y === them.board.shipCoords.length - 1) {
                   console.log("you missed");
                   square[i].setAttribute("id", "missed");
-                  aiPlay();
+                  needToPlace.innerHTML = "YOU MISSED";
+                  setTimeout(() => {
+                     aiPlay();
+                  }, 1000);
                }
             }
          }
