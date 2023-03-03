@@ -1,6 +1,7 @@
 import { startGame, you, them } from "./game";
 
 startGame();
+console.log(them.board.shipSet);
 const prevSet = new Set();
 let isStart = false;
 // const previous = [];
@@ -47,13 +48,23 @@ function aiPlay() {
 
 setTimeout(() => {
    const square = document.querySelectorAll("td");
+   const enemyPlaced = document.getElementById("enemyplaced");
+   const needToPlace = document.getElementById("toplace");
+   enemyPlaced.innerHTML = `The enemy has placed ${them.board.shipSet.size} ship cells!`;
+   needToPlace.innerHTML = `You need to place ${them.board.shipSet.size - you.board.shipSet.size} more ships`;
    // Start game //
    const start = document.getElementById("start");
    start.addEventListener("click", (e) => {
-      console.log("started");
-      console.log(them.board.shipCoords);
-      isStart = !isStart;
-      console.log(isStart);
+      if (you.board.shipSet.size < them.board.shipSet.size) {
+         alert(`Please place ${them.board.shipSet.size - you.board.shipSet.size} more ship cells`);
+      } else {
+         isStart = !isStart;
+         if (isStart === true) {
+            start.textContent = "THE GAME HAS BEGUN";
+         } else {
+            start.textContent = "START";
+         }
+      }
    });
 
    // Place Ship //
@@ -62,10 +73,21 @@ setTimeout(() => {
          if (isStart === false) {
             if (square[i].getAttribute("id") === "clicked") {
                square[i].removeAttribute("id", "clicked");
+               for (let p = 0; p <= you.board.shipSet.size; p++) {
+                  if (Number(String(Array.from(you.board.shipSet)[p]).charAt(0)) === Number(square[i].firstElementChild.id[1]) && Number(String(Array.from(you.board.shipSet)[p]).charAt(1)) === Number(square[i].firstElementChild.id[2])) {
+                     you.board.shipSet.delete(Number(String(`${Number(String(Array.from(you.board.shipSet)[p]).charAt(0))}${Number(String(Array.from(you.board.shipSet)[p]).charAt(1))}`)));
+                  }
+               }
+               needToPlace.innerHTML = `You need to place ${them.board.shipSet.size - you.board.shipSet.size} more ships`;
             } else {
-               square[i].setAttribute("id", "clicked");
-               you.board.placeShip(Number(square[i].firstElementChild.id[1]), Number(square[i].firstElementChild.id[2]), 1);
-               console.log(you.board.shipCoords);
+               if (you.board.shipSet.size >= them.board.shipSet.size) {
+                  alert("Maximum number of ships placed");
+               } else {
+                  square[i].setAttribute("id", "clicked");
+                  you.board.placeShip(Number(square[i].firstElementChild.id[1]), Number(square[i].firstElementChild.id[2]), 1);
+                  console.log(you.board.shipSet);
+                  needToPlace.innerHTML = `You need to place ${them.board.shipSet.size - you.board.shipSet.size} more ships`;
+               }
             }
          } else {
             console.log("games started, cant change your board now");

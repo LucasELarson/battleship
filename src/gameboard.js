@@ -21,7 +21,7 @@ class Gameboard {
    }
 
    placeShip(coord1, coord2, length) {
-      if (coord2 >= 9 || this.shipCoords.includes([coord1, coord2])) {
+      if (coord2 >= 10 || this.shipCoords.includes([coord1, coord2])) {
          console.log("ship exceeds bounds");
       } else {
          for (let i = 0; i < length; i++) {
@@ -54,7 +54,6 @@ class Gameboard {
       if (this.shipSet.size === this.hitSet.size) {
          console.log("ALL SHIPS SUNK");
          this.allsunk = true;
-         alert("ALL SUNK");
          return this.allsunk;
       }
    }
