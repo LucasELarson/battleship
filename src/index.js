@@ -1,4 +1,5 @@
 import { startGame, you, them } from "./game";
+import "./style.css";
 
 startGame();
 console.log(them.board.shipSet);
