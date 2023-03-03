@@ -3,12 +3,11 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const isProduction = process.env.NODE_ENV == "production";
+const isProduction = process.env.NODE_ENV === "production";
 
 const config = {
    entry: "./src/index.js",
    output: {
-      filename: "main.js",
       path: path.resolve(__dirname, "dist"),
    },
    devServer: {
@@ -28,19 +27,23 @@ const config = {
             loader: "babel-loader",
          },
          {
-            test: /\.css$/i,
-            use: ["style-loader", "css-loader"],
+            test: /\.css$/,
+            use: [MiniCssExtractPlugin.loader, `css-loader`],
          },
          {
             test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
             type: "asset",
+         },
+         {
+            test: /\.html$/i,
+            loader: "html-loader",
          },
 
          // Add your rules for custom modules here
          // Learn more about loaders from https://webpack.js.org/loaders/
       ],
    },
-   mode: "development",
+   mode: "production",
 };
 
 module.exports = () => {
