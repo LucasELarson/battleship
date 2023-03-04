@@ -4,7 +4,7 @@ import "./STYLES/style.css";
 startGame();
 setTimeout(() => {
    alert("Blue = Your Ship\nGreen = You Hit\nYello = Miss\nRed = You've Been Hit");
-}, 200);
+}, 201);
 
 console.log(them.board.shipSet);
 const prevSet = new Set();
