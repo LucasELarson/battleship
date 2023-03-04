@@ -35,9 +35,7 @@ function aiPlay() {
          for (let z = 0; z < 100; z++) {
             if (Number(square[z].firstElementChild.id[1]) === placeHit[0] && Number(square[z].firstElementChild.id[2]) === placeHit[1]) {
                square[z].style.backgroundColor = "red";
-               setTimeout(() => {
-                  aiPlay();
-               }, 1000);
+               aiPlay();
                you.board.allSunk();
             }
          }
@@ -123,9 +121,7 @@ setTimeout(() => {
                   console.log("you missed");
                   square[i].setAttribute("id", "missed");
                   needToPlace.innerHTML = "YOU MISSED";
-                  setTimeout(() => {
-                     aiPlay();
-                  }, 1000);
+                  aiPlay();
                }
             }
          }
